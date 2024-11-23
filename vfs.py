@@ -22,12 +22,21 @@ class VirtualFileSystem:
             raise FileNotFoundError(f"Path {path} does not exist.")
 
     def change_directory(self, relative_path):
-        new_path = os.path.abspath(os.path.join(self.current_dir, relative_path))
-        if os.path.exists(new_path) and os.path.isdir(new_path):
-            self.current_dir = new_path
-            return self.current_dir
+
+        if relative_path == "-":
+            parent_dir = os.path.dirname(self.current_dir)
+            if parent_dir == self.current_dir:
+                return "No previous directory to return to."
+            self.current_dir = parent_dir
+            return f"Changed directory to {self.current_dir}"
         else:
-            raise FileNotFoundError(f"Directory {relative_path} does not exist.")
+
+            new_path = os.path.abspath(os.path.join(self.current_dir, relative_path))
+            if os.path.exists(new_path) and os.path.isdir(new_path):
+                self.current_dir = new_path
+                return f"Changed directory to {self.current_dir}"
+            else:
+                raise FileNotFoundError(f"Directory {relative_path} does not exist.")
 
     def read_file(self, file_name):
         file_path = os.path.join(self.current_dir, file_name)
