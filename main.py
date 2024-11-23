@@ -16,7 +16,7 @@ def main():
     except Exception as e:
         print(f"Error initializing virtual file system: {e}")
         sys.exit(1)
-
+#создание и запуск
     root = Tk()
     root.title("Dz1 Shell Emulator xD")
     gui = ShellGUI(root, username, vfs)

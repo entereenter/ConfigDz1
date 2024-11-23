@@ -1,7 +1,9 @@
 import tkinter as tk
 from tkinter import scrolledtext
 from shell import Shell
+#Класс для графического интерфейса
 class ShellGUI:
+    #Конструктор
     def __init__(self, master, user, vfs):
         self.master = master
         self.shell = Shell(user, vfs)
@@ -14,7 +16,7 @@ class ShellGUI:
         self.entry.bind("<Return>", self.run_command)
 
         self.output.insert(tk.END, f"{user}@shell:~$ Welcome to the shell emulator!\n\n")
-
+    #Обработка ввода команд
     def run_command(self, event):
         command = self.entry.get()
         self.output.insert(tk.END, f"{self.shell.user}@shell:~$ {command}\n")
