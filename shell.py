@@ -7,7 +7,7 @@ class Shell:
         self.vfs = vfs
     #Обработка введенной команды
     def execute_command(self, command):
-        parts = command.strip().split()#Отделяем ком
+        parts = command.strip().split()#Отделяем комманду на части
 
 
         cmd = parts[0]
