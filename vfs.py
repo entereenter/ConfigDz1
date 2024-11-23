@@ -26,22 +26,22 @@ class VirtualFileSystem:
             raise FileNotFoundError(f"Path {path} does not exist.")
 #Функция cd
     def change_directory(self, relative_path):
-
+    #Переход в родительскую директорию
         if relative_path == "-":
             parent_dir = os.path.dirname(self.current_dir)
-            if parent_dir == self.current_dir:
+            if parent_dir == self.current_dir: #Текущая директория является корневой
                 return "No previous directory to return to."
-            self.current_dir = parent_dir
+            self.current_dir = parent_dir #Обновление текущей директории
             return f"Changed directory to {self.current_dir}"
         else:
-
+            #создание абсолютного пути и его проверка
             new_path = os.path.abspath(os.path.join(self.current_dir, relative_path))
-            if os.path.exists(new_path) and os.path.isdir(new_path):
-                self.current_dir = new_path
+            if os.path.exists(new_path) and os.path.isdir(new_path): #Проверка пути и директории
+                self.current_dir = new_path #Обновление текущей директории
                 return f"Changed directory to {self.current_dir}"
             else:
                 raise FileNotFoundError(f"Directory {relative_path} does not exist.")
-#Функция
+#Функция для чтения файла
     def read_file(self, file_name):
         file_path = os.path.join(self.current_dir, file_name)
         if os.path.exists(file_path):
